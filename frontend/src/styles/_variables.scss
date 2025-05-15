@@ -1,0 +1,104 @@
+// Variables SASS pour le projet
+
+// Couleurs principales - Palette plus professionnelle
+$primary-color: #2563eb; // blue-600 - Plus profond et plus professionnel
+$primary-dark: #1e3a8a; // blue-900 - Plus foncé pour un meilleur contraste
+$primary-light: #bfdbfe; // blue-200 - Plus subtil
+
+// Couleurs secondaires - Plus élégantes
+$secondary-color: #4b5563; // gray-600 - Plus foncé pour une meilleure lisibilité
+$secondary-dark: #111827; // gray-900 - Presque noir pour un look premium
+$secondary-light: #f9fafb; // gray-50 - Très léger pour les arrière-plans
+
+// Couleurs d'accentuation - Plus vives et modernes
+$accent-color: #0ea5e9; // sky-500 - Bleu ciel pour l'accent
+$accent-dark: #0369a1; // sky-700 - Version plus foncée
+$accent-light: #e0f2fe; // sky-100 - Version très légère
+
+// Couleurs d'alerte
+$danger-color: #ef4444; // red-500
+$warning-color: #f59e0b; // amber-500
+$success-color: #10b981; // green-500
+$info-color: #3b82f6; // blue-500
+
+// Couleurs de texte
+$text-dark: #1f2937; // gray-800
+$text-medium: #6b7280; // gray-500
+$text-light: #f9fafb; // gray-50
+
+// Couleurs de fond
+$bg-white: #ffffff;
+$bg-light: #f9fafb; // gray-50
+$bg-dark: #111827; // gray-900
+
+// Espacements
+$spacing-xs: 0.25rem; // 4px
+$spacing-sm: 0.5rem; // 8px
+$spacing-md: 1rem; // 16px
+$spacing-lg: 1.5rem; // 24px
+$spacing-xl: 2rem; // 32px
+$spacing-2xl: 3rem; // 48px
+$spacing-3xl: 4rem; // 64px
+
+// Typographie - Plus moderne et professionnelle
+$font-family-sans: 'Poppins', 'Inter', system-ui, -apple-system, sans-serif; // Poppins est plus moderne
+$font-family-serif: 'Merriweather', Georgia, Cambria, "Times New Roman", Times, serif;
+$font-family-mono: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+// Tailles de police plus précises et professionnelles
+$font-size-xs: 0.75rem; // 12px
+$font-size-sm: 0.875rem; // 14px
+$font-size-md: 1rem; // 16px
+$font-size-lg: 1.125rem; // 18px
+$font-size-xl: 1.25rem; // 20px
+$font-size-2xl: 1.5rem; // 24px
+$font-size-3xl: 1.875rem; // 30px
+$font-size-4xl: 2.25rem; // 36px
+$font-size-5xl: 3rem; // 48px
+$font-size-6xl: 3.75rem; // 60px - Pour les grands titres impressionnants
+
+// Poids de police
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+
+// Bordures et ombres - Plus raffinées et modernes
+$border-radius-sm: 0.25rem; // 4px - Légèrement plus arrondi
+$border-radius-md: 0.5rem; // 8px - Plus arrondi pour un look moderne
+$border-radius-lg: 0.75rem; // 12px - Plus arrondi
+$border-radius-xl: 1rem; // 16px - Encore plus arrondi
+$border-radius-full: 9999px;
+
+// Ombres plus subtiles et élégantes
+$shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+$shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+$shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+$shadow-outline: 0 0 0 3px rgba(66, 153, 225, 0.5);
+
+// Breakpoints
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;
+
+// Transitions
+$transition-fast: 150ms;
+$transition-normal: 300ms;
+$transition-slow: 500ms;
+$transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+
+// Z-index
+$z-index-dropdown: 1000;
+$z-index-sticky: 1020;
+$z-index-fixed: 1030;
+$z-index-modal-backdrop: 1040;
+$z-index-modal: 1050;
+$z-index-popover: 1060;
+$z-index-tooltip: 1070;

@@ -1,0 +1,137 @@
+// Mixins SASS pour le projet
+
+// Mixin pour les media queries
+@mixin breakpoint($point) {
+  @if $point == sm {
+    @media (min-width: $breakpoint-sm) { @content; }
+  } @else if $point == md {
+    @media (min-width: $breakpoint-md) { @content; }
+  } @else if $point == lg {
+    @media (min-width: $breakpoint-lg) { @content; }
+  } @else if $point == xl {
+    @media (min-width: $breakpoint-xl) { @content; }
+  } @else if $point == 2xl {
+    @media (min-width: $breakpoint-2xl) { @content; }
+  }
+}
+
+// Mixin pour les transitions
+@mixin transition($property: all, $duration: $transition-normal, $timing: $transition-timing) {
+  transition-property: $property;
+  transition-duration: $duration;
+  transition-timing-function: $timing;
+}
+
+// Mixin pour les ombres
+@mixin shadow($level: md) {
+  @if $level == sm {
+    box-shadow: $shadow-sm;
+  } @else if $level == md {
+    box-shadow: $shadow-md;
+  } @else if $level == lg {
+    box-shadow: $shadow-lg;
+  } @else if $level == xl {
+    box-shadow: $shadow-xl;
+  }
+}
+
+// Mixin pour les boutons - Style plus moderne et professionnel
+@mixin button($bg-color: $primary-color, $text-color: white, $hover-darken: 10%) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-md $spacing-xl;
+  background-color: $bg-color;
+  color: $text-color;
+  border-radius: $border-radius-md;
+  font-weight: $font-weight-medium;
+  font-family: $font-family-sans;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  font-size: $font-size-sm;
+  box-shadow: $shadow-md;
+  @include transition(all);
+
+  &:hover {
+    background-color: darken($bg-color, $hover-darken);
+    transform: translateY(-2px);
+    box-shadow: $shadow-lg;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: $shadow-outline;
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: $shadow-sm;
+  }
+}
+
+// Mixin pour les cartes - Style plus élégant et moderne
+@mixin card($bg-color: white, $padding: $spacing-lg, $radius: $border-radius-lg) {
+  background-color: $bg-color;
+  border-radius: $radius;
+  padding: $padding;
+  box-shadow: $shadow-lg;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: $shadow-xl;
+  }
+}
+
+// Mixin pour le texte tronqué
+@mixin truncate($lines: 1) {
+  @if $lines == 1 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+// Mixin pour les grilles flexibles
+@mixin flex-grid($columns: 3, $gap: $spacing-md) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+
+  @include breakpoint(sm) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  @include breakpoint(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include breakpoint(lg) {
+    grid-template-columns: repeat($columns, 1fr);
+  }
+}
+
+// Mixin pour les conteneurs
+@mixin container($max-width: 1200px, $padding: $spacing-md) {
+  width: 100%;
+  max-width: $max-width;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: $padding;
+  padding-right: $padding;
+}
+
+// Mixin pour les images de fond
+@mixin bg-image($url, $overlay-color: rgba(0, 0, 0, 0.5), $position: center, $size: cover) {
+  background-image: linear-gradient($overlay-color, $overlay-color), url($url);
+  background-position: $position;
+  background-size: $size;
+  background-repeat: no-repeat;
+}

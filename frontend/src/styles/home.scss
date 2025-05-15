@@ -1,0 +1,644 @@
+// Importer les variables et mixins
+@import 'variables';
+@import 'mixins';
+
+// Styles de la page d'accueil
+.home-page {
+  // Styles généraux de la page
+  color: $text-dark;
+  font-family: $font-family-sans;
+
+  // Ajouter les polices Google
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Merriweather:wght@400;700&family=Fira+Code:wght@400;500&display=swap');
+
+  // En-tête - Style plus moderne et professionnel
+  header {
+    @include container(1280px, $spacing-md);
+    padding-top: $spacing-lg;
+    padding-bottom: $spacing-lg;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: $z-index-sticky;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: $shadow-sm;
+
+    .logo {
+      display: flex;
+      align-items: center;
+
+      img {
+        height: 3rem;
+        width: auto;
+        margin-right: $spacing-sm;
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+
+      h1 {
+        color: $primary-dark;
+        font-size: $font-size-xl;
+        font-weight: $font-weight-bold;
+        background: linear-gradient(90deg, $primary-dark, $primary-color);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: -0.02em;
+      }
+    }
+
+    nav {
+      ul {
+        display: flex;
+        gap: $spacing-xl;
+
+        li {
+          a {
+            color: $secondary-color;
+            font-weight: $font-weight-medium;
+            padding: $spacing-xs $spacing-sm;
+            border-radius: $border-radius-md;
+            @include transition(all);
+            position: relative;
+
+            &::after {
+              content: '';
+              position: absolute;
+              bottom: -2px;
+              left: 50%;
+              width: 0;
+              height: 2px;
+              background-color: $primary-color;
+              transition: all 0.3s ease;
+              transform: translateX(-50%);
+            }
+
+            &:hover {
+              color: $primary-color;
+
+              &::after {
+                width: 100%;
+              }
+            }
+
+            &.login-btn {
+              @include button($primary-color, white);
+              padding: $spacing-xs $spacing-md;
+
+              &::after {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    @include breakpoint(md) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    @include breakpoint(sm) {
+      flex-direction: column;
+      gap: $spacing-md;
+
+      nav ul {
+        gap: $spacing-md;
+      }
+    }
+  }
+
+  // Section héro - Style plus impressionnant et professionnel
+  .hero-section {
+    @include bg-image('/images/hero-bg.jpg', rgba(255, 255, 255, 0.8));
+    padding: 10rem 0 $spacing-3xl;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+
+    // Effet de vague en bas de la section
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 5rem;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='1' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,149.3C960,160,1056,160,1152,138.7C1248,117,1344,75,1392,53.3L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+      background-size: cover;
+      background-position: center;
+    }
+
+    h2 {
+      font-size: $font-size-5xl;
+      font-weight: $font-weight-extrabold;
+      color: $text-dark;
+      margin-bottom: $spacing-lg;
+      max-width: 60rem;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+
+      // Effet de dégradé sur le texte
+      background: linear-gradient(90deg, $primary-dark, $primary-color);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+
+      @include breakpoint(sm) {
+        font-size: $font-size-3xl;
+      }
+    }
+
+    p {
+      font-size: $font-size-xl;
+      color: $text-medium;
+      margin-bottom: $spacing-2xl;
+      max-width: 40rem;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: $spacing-md;
+
+      .primary-btn {
+        @include button($primary-color, white);
+        padding: $spacing-md $spacing-xl;
+        font-size: $font-size-md;
+      }
+
+      .secondary-btn {
+        @include button(white, $primary-color);
+        border: 1px solid $primary-color;
+        padding: $spacing-md $spacing-xl;
+        font-size: $font-size-md;
+
+        &:hover {
+          background-color: $primary-light;
+        }
+      }
+
+      @include breakpoint(sm) {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  }
+
+  // Section fonctionnalités - Style plus élégant et moderne
+  .features-section {
+    padding: $spacing-3xl 0;
+    background-color: $bg-white;
+    position: relative;
+
+    // Effet de vague en haut de la section
+    &::before {
+      content: '';
+      position: absolute;
+      top: -5rem;
+      left: 0;
+      right: 0;
+      height: 5rem;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='1' d='M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,208C1248,192,1344,192,1392,192L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+      background-size: cover;
+      background-position: center;
+      transform: rotate(180deg);
+    }
+
+    h2 {
+      font-size: $font-size-4xl;
+      font-weight: $font-weight-bold;
+      text-align: center;
+      margin-bottom: $spacing-3xl;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(90deg, $primary-color, $accent-color);
+        border-radius: $border-radius-full;
+      }
+    }
+
+    .features-grid {
+      @include container(1200px);
+      @include flex-grid(3, $spacing-xl);
+
+      .feature-card {
+        @include card;
+        text-align: center;
+        padding: $spacing-2xl;
+        border-radius: $border-radius-lg;
+
+        .icon-wrapper {
+          width: 5rem;
+          height: 5rem;
+          background: linear-gradient(135deg, $primary-light, $accent-light);
+          border-radius: $border-radius-full;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto $spacing-lg;
+          box-shadow: $shadow-md;
+          transition: all 0.3s ease;
+
+          svg {
+            width: 2.5rem;
+            height: 2.5rem;
+            color: $primary-color;
+            transition: all 0.3s ease;
+          }
+        }
+
+        &:hover .icon-wrapper {
+          transform: scale(1.1) rotate(5deg);
+
+          svg {
+            transform: scale(1.1);
+            color: darken($primary-color, 10%);
+          }
+        }
+
+        h3 {
+          font-size: $font-size-xl;
+          font-weight: $font-weight-semibold;
+          margin-bottom: $spacing-md;
+          color: $primary-dark;
+        }
+
+        p {
+          color: $text-medium;
+          line-height: 1.6;
+          font-size: $font-size-md;
+        }
+      }
+    }
+  }
+
+  // Section comment ça marche - Style plus moderne et interactif
+  .how-it-works-section {
+    padding: $spacing-3xl 0;
+    background-color: $bg-light;
+    position: relative;
+
+    // Effet de vague en haut de la section
+    &::before {
+      content: '';
+      position: absolute;
+      top: -5rem;
+      left: 0;
+      right: 0;
+      height: 5rem;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23f9fafb' fill-opacity='1' d='M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,208C1248,192,1344,192,1392,192L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+      background-size: cover;
+      background-position: center;
+      transform: rotate(180deg);
+    }
+
+    h2 {
+      font-size: $font-size-4xl;
+      font-weight: $font-weight-bold;
+      text-align: center;
+      margin-bottom: $spacing-3xl;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(90deg, $primary-color, $accent-color);
+        border-radius: $border-radius-full;
+      }
+    }
+
+    .steps {
+      max-width: 60rem;
+      margin: 0 auto;
+      padding: 0 $spacing-xl;
+
+      .step-item {
+        position: relative;
+        padding-left: $spacing-3xl;
+        margin-bottom: $spacing-2xl;
+        transition: all 0.3s ease;
+
+        &:hover {
+          transform: translateX(10px);
+
+          .step-number {
+            transform: scale(1.1);
+            box-shadow: $shadow-lg;
+          }
+        }
+
+        &:not(:last-child)::after {
+          content: '';
+          position: absolute;
+          top: 3rem;
+          bottom: -3rem;
+          left: 1.5rem;
+          width: 3px;
+          background: linear-gradient(to bottom, $primary-color, $accent-color);
+          border-radius: $border-radius-full;
+        }
+
+        .step-number {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 3rem;
+          height: 3rem;
+          background: linear-gradient(135deg, $primary-color, $accent-color);
+          color: white;
+          border-radius: $border-radius-full;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: $font-weight-bold;
+          font-size: $font-size-lg;
+          box-shadow: $shadow-md;
+          transition: all 0.3s ease;
+        }
+
+        h3 {
+          font-size: $font-size-2xl;
+          font-weight: $font-weight-semibold;
+          margin-bottom: $spacing-md;
+          color: $primary-dark;
+        }
+
+        p {
+          color: $text-medium;
+          font-size: $font-size-md;
+          line-height: 1.6;
+          max-width: 90%;
+        }
+      }
+    }
+  }
+
+  // Section CTA - Style plus attrayant et moderne
+  .cta-section {
+    background-image: linear-gradient(135deg, $primary-color, $primary-dark);
+    padding: $spacing-3xl 0;
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+
+    // Effet de vague en haut de la section
+    &::before {
+      content: '';
+      position: absolute;
+      top: -5rem;
+      left: 0;
+      right: 0;
+      height: 5rem;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23f9fafb' fill-opacity='1' d='M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,208C1248,192,1344,192,1392,192L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+      background-size: cover;
+      background-position: center;
+      transform: rotate(180deg);
+    }
+
+    // Cercles décoratifs
+    &::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 80%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    h2 {
+      font-size: $font-size-4xl;
+      font-weight: $font-weight-bold;
+      margin-bottom: $spacing-lg;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    p {
+      font-size: $font-size-xl;
+      margin-bottom: $spacing-2xl;
+      max-width: 40rem;
+      margin-left: auto;
+      margin-right: auto;
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+
+    .cta-button {
+      @include button(white, $primary-color);
+      padding: $spacing-md $spacing-2xl;
+      font-size: $font-size-md;
+      font-weight: $font-weight-semibold;
+      box-shadow: $shadow-lg;
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: all 0.6s ease;
+      }
+
+      &:hover {
+        background-color: white;
+        transform: translateY(-3px);
+        box-shadow: $shadow-xl;
+
+        &::before {
+          left: 100%;
+        }
+      }
+    }
+  }
+
+  // Pied de page - Style plus élégant et moderne
+  footer {
+    background-color: $secondary-dark;
+    color: white;
+    padding: $spacing-3xl 0 $spacing-xl;
+    position: relative;
+
+    // Effet de vague en haut du footer
+    &::before {
+      content: '';
+      position: absolute;
+      top: -5rem;
+      left: 0;
+      right: 0;
+      height: 5rem;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23111827' fill-opacity='1' d='M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,208C1248,192,1344,192,1392,192L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+      background-size: cover;
+      background-position: center;
+      transform: rotate(180deg);
+    }
+
+    .footer-content {
+      @include container(1280px);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: $spacing-2xl;
+
+      @include breakpoint(md) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @include breakpoint(sm) {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-column {
+        h3, h4 {
+          font-size: $font-size-xl;
+          font-weight: $font-weight-semibold;
+          margin-bottom: $spacing-lg;
+          position: relative;
+          display: inline-block;
+
+          &::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(90deg, $primary-color, $accent-color);
+            border-radius: $border-radius-full;
+          }
+        }
+
+        p {
+          color: $secondary-light;
+          margin-bottom: $spacing-md;
+          line-height: 1.6;
+        }
+
+        ul {
+          li {
+            margin-bottom: $spacing-md;
+
+            a {
+              color: $secondary-light;
+              @include transition(all);
+              position: relative;
+              padding-left: $spacing-sm;
+
+              &::before {
+                content: '→';
+                position: absolute;
+                left: -5px;
+                opacity: 0;
+                transition: all 0.3s ease;
+              }
+
+              &:hover {
+                color: white;
+                padding-left: $spacing-md;
+
+                &::before {
+                  opacity: 1;
+                  left: 0;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .footer-bottom {
+      @include container(1280px);
+      margin-top: $spacing-2xl;
+      padding-top: $spacing-xl;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      @include breakpoint(sm) {
+        flex-direction: column;
+        gap: $spacing-lg;
+        text-align: center;
+      }
+
+      .copyright {
+        color: $secondary-light;
+        font-size: $font-size-sm;
+      }
+
+      .social-links {
+        display: flex;
+        gap: $spacing-md;
+
+        a {
+          color: $secondary-light;
+          @include transition(all);
+          width: 40px;
+          height: 40px;
+          border-radius: $border-radius-full;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: rgba(255, 255, 255, 0.05);
+
+          svg {
+            width: 20px;
+            height: 20px;
+            transition: all 0.3s ease;
+          }
+
+          &:hover {
+            color: white;
+            background-color: $primary-color;
+            transform: translateY(-3px);
+            box-shadow: $shadow-md;
+
+            svg {
+              transform: scale(1.1);
+            }
+          }
+        }
+      }
+    }
+  }
+}
