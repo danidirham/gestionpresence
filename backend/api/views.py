@@ -19,6 +19,10 @@ from .serializers import (
     MessageSerializer, MessageDetailSerializer, BulkMessageSerializer,
     DonneesBiometriquesSerializer
 )
+from django.conf import settings as django_settings
+import base64
+import os
+from django.core.files.base import ContentFile
 
 from django.contrib.auth import get_user_model
 from django.db.models import Q
@@ -162,11 +166,19 @@ class EtudiantViewSet(viewsets.ModelViewSet):
 
         face_service = FaceRecognitionService()
         result = face_service.register_face(etudiant.id, base64_image)
-
+        
         if result['success']:
             # Mettre à jour la photo de l'étudiant
-            etudiant.photo = request.data.get('image')
-            etudiant.save()
+            image_data = base64.b64decode(base64_image)
+            image_name = f"{etudiant.id}_face.jpg"  # Generate a unique image name
+            image_path = os.path.join(django_settings.MEDIA_ROOT, 'photos_etudiants', image_name)
+
+        # Save the image file
+            with open(image_path, "wb") as img_file:
+                img_file.write(image_data)
+
+        # Save the image to the Etudiant model
+            etudiant.photo.save(image_name, ContentFile(image_data), save=True)
 
             # Mettre à jour ou créer les données biométriques
             DonneesBiometriques.objects.update_or_create(
@@ -701,8 +713,6 @@ def export_absence_alerts(request):
 @permission_classes([IsAuthenticated])
 def settings(request):
     if request.method == 'GET':
-        # Récupérer les paramètres actuels
-        from django.conf import settings as django_settings
         return Response({
             'face_recognition_confidence_threshold': getattr(django_settings, 'FACE_RECOGNITION_CONFIDENCE_THRESHOLD', 85),
         })
@@ -718,7 +728,7 @@ def settings(request):
                                    status=status.HTTP_400_BAD_REQUEST)
 
                 # Mettre à jour le paramètre dans les settings
-                from django.conf import settings as django_settings
+                
                 setattr(django_settings, 'FACE_RECOGNITION_CONFIDENCE_THRESHOLD', confidence_threshold)
 
                 # Enregistrer dans le fichier .env si disponible

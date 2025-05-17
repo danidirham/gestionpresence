@@ -66,6 +66,7 @@ class EtudiantSerializer(serializers.ModelSerializer):
     date_naissance = serializers.DateField(format='%Y-%m-%d')
     # Make photo field optional to avoid validation errors
     photo = serializers.ImageField(required=False, allow_null=True)
+    classe_nom = serializers.SerializerMethodField()
 
     class Meta:
         model = Etudiant
@@ -80,6 +81,9 @@ class EtudiantSerializer(serializers.ModelSerializer):
         if 'photo' in data and isinstance(data['photo'], str) and len(data['photo']) > 100:
             data.pop('photo')
         return data
+    
+    def get_classe_nom(self, obj):
+        return obj.classe.nom
 
 class EtudiantListSerializer(serializers.ModelSerializer):
     classe_nom = serializers.ReadOnlyField(source='classe.nom')

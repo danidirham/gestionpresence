@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 # Try to import OpenCV, but provide a fallback if it's not available
 try:
-    # # # # # # # # # # # # # # # import cv2
+    # # # # # # # # # # # # # # # # import cv2
     OPENCV_AVAILABLE = True
 except ImportError:
     OPENCV_AVAILABLE = False

@@ -30,27 +30,18 @@ class PresenceStatisticsService:
             queryset = queryset.filter(etudiant__classe_id=classe_id)
 
         # Obtenir les présences par jour
-        presences_by_day = (
-            queryset
-            .annotate(day=TruncDate('date'))
-            .values('day')
-            .annotate(count=Count('id'))
-            .order_by('day')
-        )
 
-        # Ajouter le nombre total d'étudiants et calculer les absences
         result = []
-        for presence in presences_by_day:
-            # Calculer le nombre d'absents pour ce jour
-            absent_count = total_students - presence['count']
+        for presence in queryset:
+            print(presence)
+            # absent_count = total_students - presence['count']
 
-            # Ajouter les informations au résultat
-            result.append({
-                'day': presence['day'],
-                'count': presence['count'],
-                'total_students': total_students,
-                'absent_count': absent_count
-            })
+            # result.append({
+            #     'day': presence['day'],
+            #     'count': presence['count'],
+            #     'total_students': total_students,
+            #     'absent_count': absent_count
+            # })
 
         return result
 
